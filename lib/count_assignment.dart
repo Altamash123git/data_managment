@@ -21,12 +21,13 @@ class _count extends State<count_assign> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     mcontroller =
-        AnimationController(vsync: this, duration: Duration(seconds: 4));
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
 
     rotateanimation =
-        Tween<double>(begin: 0.0, end: 10.0).animate(mcontroller!);
+        Tween<double>(begin: 0.0, end: 360.0).animate(mcontroller!);
 
     getcount();
+    mcontroller!.forward();
   }
 
   @override
@@ -53,12 +54,11 @@ class _count extends State<count_assign> with SingleTickerProviderStateMixin {
                 ),
                 animation: mcontroller!,
                 builder: (c, child) {
-                  return Transform.translate(
-                    offset:
-                        Offset(rotateanimation!.value, rotateanimation!.value),
+                  return Transform.rotate(
+
                     //scale: rotateanimation!.value,
 
-                    //angle: rotateanimation!.value,
+                    angle: rotateanimation!.value,
                     child: child,
                   );
                 })

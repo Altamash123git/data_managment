@@ -1,3 +1,4 @@
+import 'package:data_managment/animation.dart';
 import 'package:data_managment/count_assignment.dart';
 import 'package:flutter/material.dart';
 
