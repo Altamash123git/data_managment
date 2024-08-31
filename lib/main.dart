@@ -1,5 +1,6 @@
 import 'package:data_managment/animation.dart';
 import 'package:data_managment/count_assignment.dart';
+import 'package:data_managment/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: count_assign(),
+      home: splash(),
     );
   }
 }
