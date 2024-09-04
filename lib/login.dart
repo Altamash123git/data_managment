@@ -84,8 +84,12 @@ class _loginpageState extends State<loginpage> {
                    loggedin=true;
                    getlogininfo();
                    Navigator.pushReplacement(context, PageTransition(child: homepage(), type: PageTransitionType.rightToLeft));
-                 }, child: Text("log in", style: TextStyle(fontSize: 22),))
+                 },
+                     child: Text("log in", style: TextStyle(fontSize: 22),)),
+                 
+
                ],
+
              ),
            ),
          ],
