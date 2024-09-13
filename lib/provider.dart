@@ -26,9 +26,18 @@ class state_mnagment extends ChangeNotifier{
   }
 void updatenotes({required String mtitle, required String mdesc, required int id}) async{
     bool check= await dbHelper.updatenotes(title: mtitle, desc: mdesc, id: id);
-    _data= await dbHelper.getnotes();
-    notifyListeners();
+
+
     if (check){
+      _data= await dbHelper.getnotes();
+      notifyListeners();
+    }
+}
+void deletenotes({required int id}) async{
+    bool check = await dbHelper.deletenotes(id: id);
+    if (check){
+      _data= await dbHelper.getnotes();
+      notifyListeners();
 
     }
 }
