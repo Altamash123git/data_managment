@@ -84,8 +84,7 @@ class addnotes extends StatelessWidget {
 
                            }else if(isupdate==true){
                              context.read<state_mnagment>().updatenotes(mtitle: titlecontroller.text, mdesc: desccontroller.text, id: id);
-                             print("im tapped");
-                             print(Provider.of<state_mnagment>(context, listen: false).getnotes());
+
                            }
                            Navigator.pop(context);
                          }

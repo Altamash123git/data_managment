@@ -1,3 +1,5 @@
+
+
 import 'dart:math';
 
 import 'package:data_managment/addnotes_page.dart';
@@ -8,7 +10,10 @@ import 'package:provider/provider.dart';
 
 class detailpage extends StatefulWidget {
   int id;
-  detailpage({required this.id});
+  String title;
+  String desc;
+  detailpage({required this.id, required this.title, required this.desc
+  });
 
 
 
@@ -17,17 +22,15 @@ class detailpage extends StatefulWidget {
 }
 
 class _detailpageState extends State<detailpage> {
-  List<Map<String,dynamic>> allnotes=[];
-  TextEditingController titlecontroller = TextEditingController();
 
-  TextEditingController desccontroller = TextEditingController();
 
 
   @override
   Widget build(BuildContext context) {
 
-    context.read<state_mnagment>().getallnotes();
+
     return Scaffold(
+
       appBar: AppBar(
 
         backgroundColor: Color(0xff252525),
@@ -37,33 +40,29 @@ class _detailpageState extends State<detailpage> {
             child: IconButton(
               onPressed: () async{
 
-                var title= allnotes[widget.id][DbHelper.Column_note_title];
-                var desc= allnotes[widget.id][DbHelper.Column_note_desc];
+                /*var title= allnotes[widget.id][DbHelper.Column_note_title];
+                var desc= allnotes[widget.id][DbHelper.Column_note_desc];*/
 
-                Navigator.push(context, MaterialPageRoute(builder:(c)=> addnotes(isupdate: true,title: title, desc: desc,)));
+                Navigator.push(context, MaterialPageRoute(builder:(c)=> addnotes(isupdate: true,title: widget.title, desc: widget.desc,id: widget.id,)));
               },
                 icon: Icon(Icons.edit_calendar,color: Colors.white,)),
           ),
         ],
       ),
-      body:
-
-
-      Consumer<state_mnagment>(builder: (ctx,provider, _){
-        allnotes= provider.getnotes();
-        return
-          Container(
+      body:  Container(
+        padding: EdgeInsets.all(10),
         width: double.infinity,
         color: Color(0xff252525),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
 
               flex: 2,
               child: Container(
                 //color: Colors.grey,
-                child: Text(allnotes[widget.id][DbHelper.Column_note_title],style: TextStyle(
+                child: Text(widget.title,style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -78,7 +77,7 @@ class _detailpageState extends State<detailpage> {
             Flexible(
               flex: 5,
               child: Container(
-                child: Text(allnotes[widget.id][DbHelper.Column_note_desc],style: TextStyle(fontSize: 25,
+                child: Text(widget.desc,style: TextStyle(fontSize: 25,
 
                     color: Colors.white),),
                 //color: Colors.yellow,
@@ -86,10 +85,12 @@ class _detailpageState extends State<detailpage> {
             ),
           ],
         ),
-      );
+      ),
 
-      },)
+
+
 
     );
   }
 }
+

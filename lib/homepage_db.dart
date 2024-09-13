@@ -17,6 +17,7 @@ class update extends StatefulWidget {
 }
 
 class _update extends State<update> {
+
   //DbHelper dbHelper = DbHelper.getInstance();
   List<Map<String, dynamic>> allnotes = [];
   int? id;
@@ -25,10 +26,14 @@ class _update extends State<update> {
 
   @override
   Widget build(BuildContext context) {
+
     context.read<state_mnagment>().getallnotes();
     return Scaffold(
+        backgroundColor: Color(0xff252525),
         appBar: AppBar(
-          title: Text("DATABASE"),
+          backgroundColor: Color(0xff252524),
+          title: Text("My notes",style: TextStyle(color: Colors.white,fontSize: 30),),
+              centerTitle: true,
         ),
         body: Consumer<state_mnagment>(
           builder: (_, provider, __) {
@@ -40,15 +45,16 @@ class _update extends State<update> {
                       return ListTile(
                           //selected: id,
                           onTap: () {
-                            id = i;
+                            id = allnotes[i][DbHelper.Column_note_id];
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (c) => detailpage(id: i)));
+                                    builder: (c) => detailpage(id:id!, title: allnotes[i][DbHelper.Column_note_title],desc: allnotes[i][DbHelper.Column_note_desc],)));
                           },
-                          title: Text(allnotes[i][DbHelper.Column_note_title]),
-                          subtitle:
-                              Text(allnotes[i][DbHelper.Column_note_desc]),
+                          title: Text(allnotes[i][DbHelper.Column_note_title],style: TextStyle(fontSize: 24,color: Colors.white),),
+                          //subtitle:Text(DateTime.now().millisecondsSinceEpoch.toString()),
+                         /* subtitle:
+                              Text(allnotes[i][DbHelper.Column_note_desc]),*/
                           trailing: SizedBox(
                               width: 100,
                               child: Row(children: [
@@ -73,7 +79,10 @@ class _update extends State<update> {
 
                                       //add();
                                     },
-                                    icon: Icon(Icons.edit))
+                                    icon: Icon(Icons.edit,color: Colors.white,)),
+                                IconButton(onPressed: (){
+                                  context.read<state_mnagment>().deletenotes(id: allnotes[i][DbHelper.Column_note_id]);
+                                }, icon: Icon(Icons.delete, color: Colors.red,)),
                               ])));
                     })
                 : Center(
